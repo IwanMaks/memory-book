@@ -1,0 +1,6 @@
+import type { ComponentProps } from 'react'
+import { cn } from '@/shared/lib'
+
+export function Card({ className, ...props }: ComponentProps<'div'>) {
+  return <div className={cn('rounded-xl border bg-card p-4 shadow-xs', className)} {...props} />
+}

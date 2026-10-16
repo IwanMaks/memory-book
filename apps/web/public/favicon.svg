@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Memory Book</title>
+  <rect width="512" height="512" rx="112" fill="#b4532a"/>
+  <path d="M256 150c-38-26-92-34-140-28v236c48-6 102 2 140 28 38-26 92-34 140-28V122c-48-6-102 2-140 28Z" fill="#faf7f2"/>
+  <path d="M256 150v236" stroke="#b4532a" stroke-width="14" stroke-linecap="round"/>
+  <path d="M318 122v86l26-18 26 18v-90" fill="#e9a23b"/>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "memory-book",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.5.2",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --parallel --filter @memory-book/api --filter @memory-book/web dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test",
+    "lint": "biome check . && pnpm --filter @memory-book/web lint:fsd",
+    "format": "biome check --write .",
+    "db:up": "docker compose up -d postgres",
+    "db:generate": "pnpm --filter @memory-book/api db:generate",
+    "db:migrate": "pnpm --filter @memory-book/api db:migrate",
+    "db:studio": "pnpm --filter @memory-book/api db:studio"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.15",
+    "typescript": "^7.0.2"
+  }
+}

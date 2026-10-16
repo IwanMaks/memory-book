@@ -11,6 +11,7 @@
   "scripts": {
     "dev": "tsx watch --env-file-if-exists=../../.env src/entry.node.ts",
     "build": "tsup",
+    "vercel-build": "tsup",
     "start": "node dist/entry.node.js",
     "typecheck": "tsc -p tsconfig.json",
     "test": "vitest run",
@@ -24,6 +25,7 @@
     "@memory-book/shared": "workspace:*",
     "@node-rs/argon2": "^2.2.2",
     "@scalar/hono-api-reference": "^0.12.12",
+    "@vercel/functions": "^3.10.1",
     "drizzle-orm": "^0.45.4",
     "hono": "^4.13.13",
     "pg": "^8.23.1",

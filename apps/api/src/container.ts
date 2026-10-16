@@ -1,3 +1,4 @@
+import { attachDatabasePool } from '@vercel/functions/db-connections'
 import type { Env } from './config/env'
 import { systemClock } from './core/ports/clock'
 import { argon2Hasher } from './infra/crypto/argon2.hasher'
@@ -15,7 +16,14 @@ import { DrizzleReadingRepository, ReadingService } from './modules/reading'
 /** Composition root: единственное место, где модули узнают о конкретных реализациях. */
 export function createContainer(env: Env) {
   const isServerless = Boolean(process.env.VERCEL)
-  const db = createDb(env.DATABASE_URL, { maxConnections: isServerless ? 1 : 10 })
+  // На Vercel (Fluid compute) инстанс может обслуживать несколько запросов сразу, поэтому пул
+  // небольшой, но не из одного соединения. Пул держим глобально, а attachDatabasePool
+  // закрывает простаивающие соединения до заморозки инстанса.
+  const db = createDb(
+    env.DATABASE_URL,
+    isServerless ? { maxConnections: 5, idleTimeoutMs: 5_000 } : { maxConnections: 10 },
+  )
+  if (isServerless) attachDatabasePool(db.$client)
   const cookie = { secure: env.NODE_ENV === 'production' }
 
   const authService = new AuthService({
